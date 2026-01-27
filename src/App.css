@@ -1,0 +1,331 @@
+/* Carousel Screen */
+.carousel-screen {
+  padding: 40px 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 2.2rem;
+  background: linear-gradient(to right, #fff, #aaa);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header p {
+  color: #ccc;
+  font-size: 1.1rem;
+}
+
+.carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.carousel-container::-webkit-scrollbar {
+  display: none;
+  /* Safari/Chrome */
+}
+
+.bike-card {
+  min-width: 280px;
+  max-width: 280px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.4s;
+}
+
+.bike-card:hover {
+  transform: translateY(-10px);
+}
+
+.bike-image-container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.bike-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
+.card-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.card-info p {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 20px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.view-button {
+  margin-top: auto;
+  padding: 12px;
+  background: var(--accent);
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Viewer Screen */
+.viewer-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.ar-button {
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 10px 20px;
+  color: #1a1a1a;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.bike-info-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  pointer-events: none;
+}
+
+.bike-details,
+.loan-cta {
+  pointer-events: auto;
+  margin-bottom: 15px;
+  padding: 20px;
+}
+
+.bike-details h2 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.tagline {
+  color: #ccc;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.color-selection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.color-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.color-dot.active {
+  border-color: white;
+  transform: scale(1.2);
+}
+
+.color-name {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-left: 5px;
+}
+
+.loan-cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid var(--accent);
+}
+
+.loan-cta p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.cta-button {
+  background: var(--accent);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .loan-cta {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-button {
+    width: 100%;
+  }
+}
+
+/* Gate Screen (Show QR) */
+.gate-screen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(circle at center, #1a0525, #000);
+}
+
+.gate-content {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.showroom-tag {
+  background: var(--accent);
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.qr-box {
+  padding: 20px;
+  background: white;
+  border-radius: 20px;
+  margin: 10px 0;
+  box-shadow: 0 0 40px rgba(255, 0, 127, 0.4);
+}
+
+.qr-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.mobile-hint {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+/* Question Screen */
+.question-screen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.question-content {
+  width: 100%;
+  max-width: 500px;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.brand-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.question-content h1 {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 30px;
+  background: linear-gradient(to bottom, #fff, #aaa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.question-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.question-content input {
+  padding: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 15px;
+  color: white;
+}
+
+.badge {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
