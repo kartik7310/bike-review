@@ -4,7 +4,7 @@ export const bikes = [
     name: 'Hero Splendor Plus',
     tagline: 'Mileage King – Everyday reliability',
     image: '/images/hero_splendor.png',
-    modelUrl: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // Placeholder
+    modelUrl: '/images/modern+motorcycle+3d+model.glb', // Placeholder
     colors: [
       { name: 'Classic Black', hex: '#1a1a1a' },
       { name: 'Ruby Red', hex: '#b31d1d' },
@@ -16,7 +16,7 @@ export const bikes = [
     name: 'Royal Enfield Classic 350',
     tagline: 'Retro legend with strong road presence',
     image: '/images/royal_enfield.png',
-    modelUrl: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // Placeholder
+    modelUrl: '/images/modern+motorcycle+3d+model.glb', // Placeholder
     colors: [
       { name: 'Chrome Silver', hex: '#d1d1d1' },
       { name: 'British Red', hex: '#8b0000' },
@@ -28,7 +28,7 @@ export const bikes = [
     name: 'Yamaha MT 15 V2',
     tagline: 'Aggressive street style',
     image: '/images/yamaha_mt15.png',
-    modelUrl: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // Placeholder
+    modelUrl: '/images/modern+motorcycle+3d+model.glb', // Placeholder
     colors: [
       { name: 'Dark Matte Blue', hex: '#00004d' },
       { name: 'Cyan Storm', hex: '#00ffff' },
@@ -40,7 +40,7 @@ export const bikes = [
     name: 'Honda Shine 125',
     tagline: 'Smooth, reliable daily ride',
     image: 'https://via.placeholder.com/600x400?text=Honda+Shine',
-    modelUrl: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb', // Placeholder
+    modelUrl: '/images/modern+motorcycle+3d+model.glb', // Placeholder
     colors: [
       { name: 'Black', hex: '#000000' },
       { name: 'Grey', hex: '#808080' }
