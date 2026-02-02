@@ -3,7 +3,7 @@ import '@google/model-viewer';
 import ColorSelector from '../ui/ColorSelector';
 import ARConfirmModal from '../ui/ARConfirmModal';
 
-function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARComplete }) {
+function  ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARComplete }) {
   const modelViewerRef = useRef(null);
   const [showARModal, setShowARModal] = useState(false);
 
@@ -36,6 +36,26 @@ function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARCo
     }
   }, [activeColor]);
 
+  // Listen for AR status changes
+  useEffect(() => {
+    const modelViewer = modelViewerRef.current;
+    if (!modelViewer) return;
+
+    const handleARStatus = (event) => {
+      // 'not-presenting' means the user has exited AR
+      if (event.detail.status === 'not-presenting' && onARComplete) {
+        // We only trigger completion if we were actually in AR
+        // This prevents accidental triggers on load
+        onARComplete();
+      }
+    };
+
+    modelViewer.addEventListener('ar-status', handleARStatus);
+    return () => {
+      modelViewer.removeEventListener('ar-status', handleARStatus);
+    };
+  }, [onARComplete]);
+
   const handleARClick = () => {
     // Show confirmation modal instead of directly activating AR
     setShowARModal(true);
@@ -45,13 +65,6 @@ function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARCo
     setShowARModal(false);
     if (modelViewerRef.current) {
       modelViewerRef.current.activateAR();
-      
-      // Simulate AR completion after a delay (in real app, listen to AR exit event)
-      setTimeout(() => {
-        if (onARComplete) {
-          onARComplete();
-        }
-      }, 3000); // 3 seconds for demo, adjust as needed
     }
   };
 
@@ -92,9 +105,7 @@ function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARCo
 
       <div className="bike-info-overlay">
         <div className="bike-details glass animate-fade-in-up">
-          <div className="badge">3D Model Ready</div>
           <h2>{selectedBike.name}</h2>
-          <p className="tagline">{selectedBike.tagline}</p>
           <ColorSelector 
             colors={selectedBike.colors}
             activeColor={activeColor}
@@ -106,10 +117,6 @@ function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARCo
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </button>
-        </div>
-        <div className="loan-cta glass animate-fade-in-up">
-          <p>Love it? Ask our team about easy loans today!</p>
-          <button className="cta-button secondary">Inquire Now</button>
         </div>
       </div>
 
