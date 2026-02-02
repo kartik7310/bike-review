@@ -115,18 +115,30 @@
   color: white;
 }
 
-.ar-button {
-  background-color: white;
-  border-radius: 10px;
-  border: none;
+.music-toggle {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  padding: 10px 20px;
-  color: #1a1a1a;
-  font-weight: 600;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
 }
+
+.music-toggle.muted {
+  opacity: 0.6;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.music-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
 
 .bike-info-overlay {
   position: absolute;

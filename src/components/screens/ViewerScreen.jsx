@@ -5,9 +5,11 @@ import ARConfirmModal from '../ui/ARConfirmModal';
 
 function  ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARComplete }) {
   const modelViewerRef = useRef(null);
+  const audioRef = useRef(null);
   const [showARModal, setShowARModal] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
-  // Handle color switching via material manipulation
+
   useEffect(() => {
     if (activeColor && modelViewerRef.current) {
       const modelViewer = modelViewerRef.current;
@@ -18,7 +20,7 @@ function  ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARC
         
         materials.forEach(material => {
           const name = material.name.toLowerCase();
-          // Target common motorcycle paint/body material names
+         
           if (name.includes('body') || name.includes('paint') || name.includes('frame') || name.includes('tank')) {
             material.pbrMetallicRoughness.setBaseColorFactor(activeColor.hex);
             applied = true;
@@ -44,8 +46,7 @@ function  ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARC
     const handleARStatus = (event) => {
       // 'not-presenting' means the user has exited AR
       if (event.detail.status === 'not-presenting' && onARComplete) {
-        // We only trigger completion if we were actually in AR
-        // This prevents accidental triggers on load
+       
         onARComplete();
       }
     };
@@ -55,6 +56,49 @@ function  ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARC
       modelViewer.removeEventListener('ar-status', handleARStatus);
     };
   }, [onARComplete]);
+
+  // Audio start logic
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.4;
+    
+    const playAudio = () => {
+      audio.play().then(() => {
+        // Successfully playing
+        window.removeEventListener('click', playAudio);
+        window.removeEventListener('touchstart', playAudio);
+      }).catch(err => {
+        console.log("Autoplay blocked, waiting for interaction");
+      });
+    };
+
+    // Try immediately
+    playAudio();
+
+    // Also listen for first interaction
+    window.addEventListener('click', playAudio);
+    window.addEventListener('touchstart', playAudio);
+
+    return () => {
+      window.removeEventListener('click', playAudio);
+      window.removeEventListener('touchstart', playAudio);
+    };
+  }, []);
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.muted = false;
+        audioRef.current.play().catch(console.error);
+        setIsMuted(false);
+      } else {
+        audioRef.current.muted = true;
+        setIsMuted(true);
+      }
+    }
+  };
 
   const handleARClick = () => {
     // Show confirmation modal instead of directly activating AR
@@ -79,6 +123,24 @@ function  ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARC
           <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
       </button>
+
+      <button className={`music-toggle glass ${isMuted ? 'muted' : ''}`} onClick={toggleMute}>
+        {isMuted ? (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6"/>
+          </svg>
+        ) : (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+        )}
+      </button>
+
+      <audio 
+        ref={audioRef}
+        src="/construction-architecture-development-music-340810.mp3"
+        loop
+      />
 
 
 
