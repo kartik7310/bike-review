@@ -599,3 +599,251 @@
     height: 150px;
   }
 }
+
+.ar-step-btn {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cta-button.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+
+/* AR Confirmation Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  max-width: 400px;
+  width: 90%;
+  padding: 40px 30px;
+  text-align: center;
+  animation: slideUp 0.4s ease-out;
+}
+
+.modal-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.modal-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.modal-content p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.modal-btn {
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cancel-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.confirm-btn {
+  background: var(--accent);
+  color: white;
+}
+
+.confirm-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 0, 127, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Congratulations Screen */
+.congratulations-screen {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: radial-gradient(circle at center, #1a0525, #000);
+  position: relative;
+  overflow: hidden;
+}
+
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confetti-fall 3s linear forwards;
+}
+
+@keyframes confetti-fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+.congratulations-screen {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f0f1a, #1b1b2f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+}
+
+.congrats-content {
+  text-align: center;
+  max-width: 420px;
+  padding: 2rem;
+  animation: fadeUp 0.6s ease-out;
+}
+
+.party-emoji {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.congrats-title {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.congrats-message {
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.congrats-features p {
+  margin: 0.4rem 0;
+  opacity: 0.85;
+}
+
+.congrats-btn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  background: #00d4ff;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.congrats-btn:hover {
+  transform: translateY(-2px);
+}
+
+.congrats-hint {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* Confetti */
+.confetti-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.confetti {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}

@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '@google/model-viewer';
 import ColorSelector from '../ui/ColorSelector';
+import ARConfirmModal from '../ui/ARConfirmModal';
 
-function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack }) {
+function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARComplete }) {
   const modelViewerRef = useRef(null);
+  const [showARModal, setShowARModal] = useState(false);
 
   // Handle color switching via material manipulation
   useEffect(() => {
@@ -35,9 +37,26 @@ function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack }) {
   }, [activeColor]);
 
   const handleARClick = () => {
+    // Show confirmation modal instead of directly activating AR
+    setShowARModal(true);
+  };
+
+  const handleARConfirm = () => {
+    setShowARModal(false);
     if (modelViewerRef.current) {
       modelViewerRef.current.activateAR();
+      
+      // Simulate AR completion after a delay (in real app, listen to AR exit event)
+      setTimeout(() => {
+        if (onARComplete) {
+          onARComplete();
+        }
+      }, 3000); // 3 seconds for demo, adjust as needed
     }
+  };
+
+  const handleARCancel = () => {
+    setShowARModal(false);
   };
 
   return (
@@ -48,9 +67,7 @@ function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack }) {
         </svg>
       </button>
 
-      <button className="ar-button glass" onClick={handleARClick}>
-        View in AR
-      </button>
+
 
       <model-viewer
         ref={modelViewerRef}
@@ -83,12 +100,26 @@ function ViewerScreen({ selectedBike, activeColor, onColorChange, onBack }) {
             activeColor={activeColor}
             onColorChange={onColorChange}
           />
+          <button className="ar-step-btn cta-button" onClick={handleARClick}>
+            Proceed to AR View
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
         </div>
         <div className="loan-cta glass animate-fade-in-up">
           <p>Love it? Ask our team about easy loans today!</p>
-          <button className="cta-button">Inquire Now</button>
+          <button className="cta-button secondary">Inquire Now</button>
         </div>
       </div>
+
+      {/* AR Confirmation Modal */}
+      <ARConfirmModal 
+        isOpen={showARModal}
+        onConfirm={handleARConfirm}
+        onCancel={handleARCancel}
+        bikeName={selectedBike.name}
+      />
     </div>
   );
 }

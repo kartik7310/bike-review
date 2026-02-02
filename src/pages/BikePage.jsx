@@ -1,45 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { bikes } from '../data/bikes';
-import GateScreen from '../components/screens/GateScreen';
-import QuestionScreen from '../components/screens/QuestionScreen';
 import CarouselScreen from '../components/screens/CarouselScreen';
 import ViewerScreen from '../components/screens/ViewerScreen';
+import CongratulationsScreen from '../components/screens/CongratulationsScreen';
 import '../App.css';
 
 function BikePage() {
-  const [screen, setScreen] = useState('gate'); // 'gate' | 'question' | 'carousel' | 'viewer'
-  const [userInput, setUserInput] = useState('');
+  const [screen, setScreen] = useState('carousel'); // 'carousel' | 'viewer' | 'congratulations'
+  const [userInput, setUserInput] = useState(''); // Keep for carousel filter if needed
   const [selectedBike, setSelectedBike] = useState(null);
   const [activeColor, setActiveColor] = useState(null);
-
-  useEffect(() => {
-    // Determine initial screen based on URL
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('source') === 'qr' || urlParams.get('qr') === 'true') {
-      setScreen('question');
-    } else {
-      setScreen('gate');
-    }
-  }, []);
-
-  const handleQuestionSubmit = (e) => {
-    e.preventDefault();
-    if (!userInput.trim()) return;
-
-    // Matching logic: Find first bike that matches input
-    const match = bikes.find(b => 
-      b.name.toLowerCase().includes(userInput.toLowerCase())
-    );
-    
-    if (match) {
-      setSelectedBike(match);
-      setActiveColor(match.colors[0]);
-      setScreen('viewer');
-    } else {
-      // If no exact match, show carousel for exploration
-      setScreen('carousel');
-    }
-  };
 
   const handleSelectBike = (bike) => {
     setSelectedBike(bike);
@@ -48,28 +18,20 @@ function BikePage() {
   };
 
   const handleBack = () => {
-    if (screen === 'viewer') setScreen('carousel');
-    else if (screen === 'carousel' || screen === 'question') {
-      // Reset search
-      setUserInput('');
-      setScreen('question');
+    if (screen === 'viewer') {
+      setScreen('carousel');
+    } else if (screen === 'congratulations') {
+      setScreen('carousel');
     }
   };
 
-  // Render appropriate screen based on state
-  if (screen === 'gate') {
-    return <GateScreen />;
-  }
+  const handleARComplete = () => {
+    setScreen('congratulations');
+  };
 
-  if (screen === 'question') {
-    return (
-      <QuestionScreen 
-        userInput={userInput}
-        onInputChange={setUserInput}
-        onSubmit={handleQuestionSubmit}
-      />
-    );
-  }
+  const handleContinueExploring = () => {
+    setScreen('carousel');
+  };
 
   if (screen === 'viewer' && selectedBike) {
     return (
@@ -78,19 +40,30 @@ function BikePage() {
         activeColor={activeColor}
         onColorChange={setActiveColor}
         onBack={handleBack}
+        onARComplete={handleARComplete}
       />
     );
   }
 
-  // Default: Carousel screen
+  if (screen === 'congratulations' && selectedBike) {
+    return (
+      <CongratulationsScreen 
+        bikeName={selectedBike.name}
+        onContinue={handleContinueExploring}
+      />
+    );
+  }
+
+  // Default: Carousel screen (Step 1)
   return (
     <CarouselScreen 
       bikes={bikes}
       userInput={userInput}
       onSelectBike={handleSelectBike}
-      onBack={handleBack}
+      onBack={() => window.history.back()}
     />
   );
 }
 
 export default BikePage;
+
