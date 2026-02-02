@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Welcome = () => {
   const navigate = useNavigate();
+
+  // Redirect to bike page if QR code was scanned
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('source') === 'qr' || urlParams.get('qr') === 'true') {
+      navigate('/bike?source=qr');
+    }
+  }, [navigate]);
 
   return (
     <div className="welcome-screen">

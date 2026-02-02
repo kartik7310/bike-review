@@ -1,7 +1,7 @@
 import React from 'react';
 
 function GateScreen() {
-  const qrUrl = encodeURIComponent(`${window.location.origin}/?source=qr`);
+  const qrUrl = encodeURIComponent(`${window.location.origin}/bike?source=qr`);
   const qrImage = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${qrUrl}`;
   
   return (
