@@ -7,14 +7,14 @@ function BikeCard({ bike, onClick, animationDelay }) {
       style={{ animationDelay: `${animationDelay}s` }}
       onClick={onClick}
     >
-      <div className="bike-image-container">
+      <div className="bike-image-container rounded-2xl">
         <img src={bike.image} alt={bike.name} loading="lazy" />
       </div>
       <div className="card-info">
         <h3>{bike.name}</h3>
         <p>{bike.tagline}</p>
       </div>
-      <button className="view-button">Inspect 3D</button>
+     {/* <button className="view-button">Inspect 3D</button> */}
     </div>
   );
 }

@@ -12,7 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --primary: #510a76;
+  --primary: rgba(255, 255, 255, 0.767);
   --secondary: #2c0442;
   --accent: #ff007f;
   --glass: rgba(255, 255, 255, 0.1);
