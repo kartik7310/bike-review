@@ -149,6 +149,70 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+.showroom-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -44%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.showroom-platform {
+  width: 500px;
+  height: 500px;
+  margin-top: 220px;
+  /* Aligns with bike wheel base */
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 75%);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateX(85deg);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+model-viewer {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+.showroom-platform img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  animation: rotateLogo 20s linear infinite;
+}
+
+@keyframes rotateLogo {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .showroom-platform {
+    width: 300px;
+    height: 300px;
+    margin-top: 150px;
+  }
+}
+
 
 .bike-info-overlay {
   position: absolute;
@@ -158,6 +222,8 @@
   padding: 20px;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
   pointer-events: none;
+  z-index: 10;
+  /* Ensure overlay is above model and showroom platform */
 }
 
 .bike-details {

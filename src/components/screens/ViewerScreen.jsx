@@ -138,11 +138,9 @@ function  ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARC
 
       <audio 
         ref={audioRef}
-        src="/construction-architecture-development-music-340810.mp3"
+        src="/Ujjivan Gaadi Geet.wav"
         loop
       />
-
-
 
       <model-viewer
         ref={modelViewerRef}
@@ -161,9 +159,15 @@ function  ViewerScreen({ selectedBike, activeColor, onColorChange, onBack, onARC
         ar
         ar-modes="webxr scene-viewer quick-look"
         interaction-prompt="none"
-        style={{ width: '100%', height: '100%', '--poster-color': 'transparent' }}
+        style={{ width: '100%', height: '100%', '--poster-color': 'transparent', background: 'transparent' }}
       >
       </model-viewer>
+
+      <div className="showroom-container">
+        <div className="showroom-platform">
+          <img src="/images/showroomLogo.jpeg" alt="Showroom Logo" />
+        </div>
+      </div>
 
       <div className="bike-info-overlay">
         <div className="bike-details glass animate-fade-in-up">
