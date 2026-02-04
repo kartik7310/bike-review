@@ -40,7 +40,7 @@ export const bikes = [
     id: 'honda-shine',
     name: 'Honda Shine 125',
     tagline: 'Smooth, reliable daily ride',
-    image: '/images/appache.jpg',
+    image: '/images/hero_splendor.png',
     modelUrl: '/images/sport+motorcycle+3d+model.glb',
     colors: [
       { name: 'Black', hex: '#00000034' },
@@ -51,7 +51,7 @@ export const bikes = [
     id: 'bajaj-pulsar',
     name: 'Bajaj Pulsar 150',
     tagline: 'Sporty and youthful',
-  image: '/images/shine.jpg',
+  image: '/images/yamaha_mt15.png',
     modelUrl: '/images/sport+motorcycle+3d+model.glb',
     colors: [
       { name: 'Neon Red', hex: '#ff0000' },

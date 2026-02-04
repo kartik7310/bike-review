@@ -5,9 +5,9 @@ function CarouselScreen({ bikes, userInput, onSelectBike, onBack }) {
   return (
     <div className="carousel-screen animate-fade-in-up">
       <header className="header">
-        <button className="minimal-back" onClick={onBack}>← Change Preference</button>
-        <h1>Bikes in Showroom</h1>
-        <p>Explore bikes</p>
+       
+        <h1>Explore Your Bike</h1>
+  
       </header>
 
       <div className="carousel-container">
